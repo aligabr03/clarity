@@ -1,0 +1,16 @@
+<button
+  [type]="type"
+  [disabled]="isDisabled || isLoading"
+  [ngClass]="{
+    'bg-gray-50 enabled:hover:bg-gray-100 enabled:active:bg-gray-200':
+      variant === 'standard',
+    'bg-green-50 enabled:hover:bg-green-100 enabled:active:bg-green-200':
+      variant === 'confirm',
+    'bg-red-50 enabled:hover:bg-red-100 enabled:active:bg-red-200':
+      variant === 'danger',
+    'cursor-not-allowed opacity-50': isDisabled || isLoading,
+  }"
+  class="m-2 rounded-lg border px-8 drop-shadow-sm transition-transform enabled:active:translate-y-0.5 enabled:active:scale-95"
+>
+  {{ text }}
+</button>
