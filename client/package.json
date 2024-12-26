@@ -1,5 +1,5 @@
 {
-  "name": "league-stats",
+  "name": "client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -22,6 +22,7 @@
     "primeng": "^19.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "twisted": "^1.61.5",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
