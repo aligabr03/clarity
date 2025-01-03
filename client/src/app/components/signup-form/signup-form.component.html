@@ -1,4 +1,22 @@
 <form class="flex flex-col rounded-3xl border bg-white px-10 py-8 shadow-lg">
+  <div class="mb-5 flex flex-col items-center">
+    <h1 class="text-3xl">Sign Up</h1>
+    <img
+      class="pointer-events-none mx-12 h-80"
+      src="assets/images/coinstack2.png"
+      alt=""
+    />
+    <h1 class="text-2xl">Savings are coming your way</h1>
+    <h2>
+      Already registered?
+      <a
+        routerLink="/login"
+        routerLinkActive="active"
+        class="underline decoration-dashed"
+        >Login</a
+      >
+    </h2>
+  </div>
   <label for="usr">Username</label>
   <input id="usr" class="rounded-full border px-3" />
   <label for="pass">Password</label>
@@ -8,6 +26,6 @@
   <button
     class="mt-5 rounded-full bg-indigo-600 px-4 py-2 text-white transition-transform hover:scale-110 hover:bg-indigo-500"
   >
-    Sign up
+    SIGN UP
   </button>
 </form>
