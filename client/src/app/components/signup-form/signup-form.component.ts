@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LinkComponent } from "../link/link.component";
 
 @Component({
   selector: 'app-signup-form',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [LinkComponent],
   templateUrl: './signup-form.component.html',
   styleUrl: './signup-form.component.css',
 })
 export class SignupFormComponent {
   showPassword() {
-    var x = document.getElementById('pass') as HTMLInputElement;
-    if (x && x.type === 'password') {
-      x.type = 'text';
+    var passwordField = document.getElementById('pass') as HTMLInputElement;
+    if (passwordField && passwordField.type === 'password') {
+      passwordField.type = 'text';
     } else {
-      x.type = 'password';
+      passwordField.type = 'password';
     }
   }
 }

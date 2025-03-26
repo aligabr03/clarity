@@ -9,14 +9,10 @@
     <h1 class="text-2xl">Savings are coming your way</h1>
     <h2>
       Already registered?
-      <a
-        routerLink="/login"
-        routerLinkActive="active"
-        class="underline decoration-dashed"
-        >Login</a
-      >
+      <app-link text="Login" link="/login"></app-link>
     </h2>
   </div>
+
   <div class="flex flex-row justify-between space-x-5">
     <div class="flex flex-col">
       <label for="fname">First name</label>
@@ -27,8 +23,10 @@
       <input id="lname" class="rounded-full border px-3" />
     </div>
   </div>
+
   <label for="usr">Username</label>
   <input id="usr" class="rounded-full border px-3" type="password" />
+
   <label for="pass">Password</label>
   <div class="flex flex-row space-x-2">
     <input id="pass" class="rounded-full border px-3" type="password" />
@@ -37,8 +35,10 @@
       <label for="showpass">Show password</label>
     </div>
   </div>
+
   <label for="passconfirm">Confirm password</label>
   <input id="passconfirm" class="rounded-full border px-3" />
+  
   <label for="dob">Date of birth</label>
   <input id="dob" type="date" class="rounded-full border px-3" />
   <button
