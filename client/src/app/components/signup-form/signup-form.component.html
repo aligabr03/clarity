@@ -1,4 +1,4 @@
-<form class="flex flex-col rounded-3xl border bg-white px-10 py-8 shadow-lg">
+<form (ngSubmit)="submitForm()" class="flex flex-col rounded-3xl border bg-white px-10 py-8 shadow-lg">
   <div class="mb-5 flex flex-col items-center">
     <h1 class="text-3xl">Sign Up</h1>
     <img
@@ -16,34 +16,60 @@
   <div class="flex flex-row justify-between space-x-5">
     <div class="flex flex-col">
       <label for="fname">First name</label>
-      <input id="fname" class="rounded-full border px-3" />
+      <input id="fname" class="rounded-full border px-3" [(ngModel)]="fname" name="fname"/>
+      @if (fnameEmpty){
+        <p class="text-red-500">First name is required</p>
+      }
     </div>
     <div class="flex flex-col">
       <label for="lname">Last name</label>
-      <input id="lname" class="rounded-full border px-3" />
+      <input id="lname" class="rounded-full border px-3" [(ngModel)]="lname" name="lname"/>
+      @if (lnameEmpty){
+        <p class="text-red-500">Last name is required</p>
+      }
     </div>
   </div>
 
   <label for="usr">Username</label>
-  <input id="usr" class="rounded-full border px-3" type="password" />
+  <input id="usr" class="rounded-full border px-3" [(ngModel)]="username" name="username"/>
+  @if (usernameEmpty){
+    <p class="text-red-500">Username is required</p>
+  }
 
   <label for="pass">Password</label>
   <div class="flex flex-row space-x-2">
-    <input id="pass" class="rounded-full border px-3" type="password" />
+    <input id="pass" class="rounded-full border px-3" type="password" [(ngModel)]="password" name="password"/>
     <div class="flex flex-row space-x-2">
       <input type="checkbox" id="showpass" (click)="showPassword()" />
       <label for="showpass">Show password</label>
     </div>
   </div>
+  @if (passwordEmpty){
+    <p class="text-red-500">Password is required</p>
+  } @else if (!passwordValid) {
+    <p class="text-red-500">Password must meet requirements</p>
+  }
+  <p class="text-stone-400">at least 8 characters long,</p>
+  <p class="text-stone-400">one uppercase letter, one lowercase letter,</p>
+  <p class="text-stone-400">one number, and one special character</p>
 
   <label for="passconfirm">Confirm password</label>
-  <input id="passconfirm" class="rounded-full border px-3" />
-  
+  <input id="passconfirm" class="rounded-full border px-3" type="password" [(ngModel)]="confirmPassword" name="confirmPassword"/>
+  @if(passwordEmpty){}
+  @else if (!passwordValid){}
+  @else if (confirmPasswordEmpty){
+    <p class="text-red-500">Please confirm password</p>
+  } @else if (!passwordsMatch) {
+    <p class="text-red-500">Passwords do not match</p>
+  }
+
   <label for="dob">Date of birth</label>
-  <input id="dob" type="date" class="rounded-full border px-3" />
-  <button
-    class="mt-5 rounded-full bg-indigo-600 px-4 py-2 text-white transition-transform hover:scale-110 hover:bg-indigo-500"
-  >
+  <input id="dob" type="date" class="rounded-full border px-3" [(ngModel)]="dob" name="dateOfBirth"/>
+  @if (dobInvalid){
+    <p class="text-red-500">Valid date of birth is required</p>
+  }
+
+  <button type="submit" class="mt-5 rounded-full bg-indigo-600 px-4 py-2 text-white transition-transform hover:scale-110 hover:bg-indigo-500">
     SIGN UP
   </button>
 </form>
