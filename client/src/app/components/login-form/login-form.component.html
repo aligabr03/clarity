@@ -1,0 +1,39 @@
+<form (ngSubmit)="submitForm()" class="flex flex-col rounded-3xl border bg-white px-10 py-8 shadow-lg">
+    <div class="mb-5 flex flex-col items-center">
+        <h1 class="text-3xl">Login  </h1>
+        <img
+          class="pointer-events-none my-3 h-48"
+          src="assets/images/cash.png"
+          alt=""
+        />
+        <h1 class="text-2xl">Savings are coming your way</h1>
+        <h2>
+          First time?
+          <app-link text="Sign up" link="/signup"></app-link>
+        </h2>
+      </div>
+
+
+    <label for="usr">Username</label>
+    <input id="usr" class="rounded-full border px-3" [(ngModel)]="username" name="username"/>
+    @if (usernameEmpty){
+      <p class="text-red-500">Username is required</p>
+    }
+  
+    <label for="pass">Password</label>
+    <div class="flex flex-row space-x-2">
+      <input id="pass" class="rounded-full border px-3" type="password" [(ngModel)]="password" name="password"/>
+      <div class="flex flex-row space-x-2">
+        <input type="checkbox" id="showpass" (click)="showPassword()" />
+        <label for="showpass">Show password</label>
+      </div>
+    </div>
+    @if (passwordEmpty){
+      <p class="text-red-500">Password is required</p>
+    }
+
+    <button type="submit" class="mt-5 rounded-full bg-indigo-600 px-4 py-2 text-white transition-transform hover:scale-110 hover:bg-indigo-500">
+      LOG IN
+    </button>
+  </form>
+  
