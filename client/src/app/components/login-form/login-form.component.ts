@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LinkComponent } from "../link/link.component";
-
+import { AuthApiService } from '../../services/api/auth-api.service';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-login-form',
@@ -10,6 +11,8 @@ import { LinkComponent } from "../link/link.component";
   styleUrl: './login-form.component.css'
 })
 export class LoginFormComponent {
+  private authApiService = inject(AuthApiService);
+
   username: string = '';
   password: string = '';
   usernameEmpty: boolean = false;
@@ -25,6 +28,15 @@ export class LoginFormComponent {
   }
 
   submitForm() {
-    console.log('Form submitted');
+    this.authApiService.login({ username: this.username, password: this.password }).subscribe(
+      response => {
+        console.log('Login successful', response);
+        // Handle successful login, e.g., redirect to a different page
+      },
+      error => {
+        console.error('Login failed', error);
+        // Handle login failure, e.g., show an error message
+      }
+    );
   }
 }
