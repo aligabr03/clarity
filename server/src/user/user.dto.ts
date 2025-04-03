@@ -19,6 +19,6 @@ export class NewUserDto {
     password: string;
 
     @IsDate()
-    @Type(() => Date) // Transform the string into a Date object
+    @Type(() => Date)
     dob: Date;
 }
