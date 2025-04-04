@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { LinkComponent } from "../link/link.component";
 import { AuthApiService } from '../../services/api/auth-api.service';
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -12,6 +13,7 @@ import { inject } from '@angular/core';
 })
 export class LoginFormComponent {
   private authApiService = inject(AuthApiService);
+  private router = inject(Router);
 
   username: string = '';
   password: string = '';
@@ -30,12 +32,10 @@ export class LoginFormComponent {
   submitForm() {
     this.authApiService.login({ username: this.username, password: this.password }).subscribe(
       response => {
-        console.log('Login successful', response);
-        // Handle successful login, e.g., redirect to a different page
+        this.router.navigate(['/home']);
       },
       error => {
         console.error('Login failed', error);
-        // Handle login failure, e.g., show an error message
       }
     );
   }
