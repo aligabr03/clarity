@@ -4,22 +4,19 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class AuthApiService {
-  private apiUrl = 'http://localhost:3000/auth';
+	private apiUrl = 'http://localhost:3000/auth';
 
-  constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient) { }
 
-  login(credentials: { username: string; password: string }): Observable<any> {
-    return this.http.post<{ access_token: string }>(`${this.apiUrl}/login`, credentials).pipe(
-      tap(response => {
-        sessionStorage.setItem('access_token', response.access_token);
-      })
-    );
-  }
-
-  logout() {
-    sessionStorage.removeItem('access_token');
-  }
+	login(credentials: { username: string; password: string }): Observable<any> {
+		return this.http.post<{ access_token: string, user: any }>(`${this.apiUrl}/login`, credentials).pipe(
+			tap(response => {
+				sessionStorage.setItem('access_token', response.access_token);
+				sessionStorage.setItem('user', JSON.stringify(response.user));
+			})
+		);
+	}
 }
