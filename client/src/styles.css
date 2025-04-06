@@ -6,4 +6,5 @@
 html,
 body {
   font-family: "Lexend", sans-serif;
+  user-select: none;
 }

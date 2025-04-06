@@ -9,6 +9,7 @@
             #trigger="cdkOverlayOrigin"
             [class.open]="menuOpen"
             (click)="menuOpen = !menuOpen"
+            
         ></lucide-icon>
         <ng-template
             cdkConnectedOverlay
@@ -21,13 +22,8 @@
     } @else {
         <app-link text="About" link="/about"></app-link>
         <app-link text="Login" link="/login"></app-link>
-        <button class="-my-2 rounded-full bg-indigo-600 px-4 py-2 text-white transition-transform hover:scale-110 hover:bg-indigo-500"
-        routerLink="/signup"
-        routerLinkActive="active">
-        GET STARTED
-    </button> 
-    }
-    
+        <app-cta-button class="-my-2" title="GET STARTED" routerLink="/signup" routerLinkActive="active"></app-cta-button>
+    }   
   </div>
 </div>
 

@@ -7,10 +7,11 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { LucideAngularModule, UserIcon } from 'lucide-angular';
 import { AuthStateService } from '../../services/auth-state.service';
 import { UserMenuComponent } from '../user-menu/user-menu.component';
+import { CtaButtonComponent } from '../cta-button/cta-button.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [LinkComponent, RouterLink, RouterLinkActive, LucideAngularModule, OverlayModule, UserMenuComponent],
+  imports: [CtaButtonComponent, LinkComponent, RouterLink, RouterLinkActive, LucideAngularModule, OverlayModule, UserMenuComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })

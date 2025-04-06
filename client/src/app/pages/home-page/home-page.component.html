@@ -1,20 +1,16 @@
 <div>
   <div class="m-10 flex flex-row items-center justify-center">
     <div class="mx-10">
-      <h1 class="w-40 text-4xl">
+      <h1 class="select-none w-40 text-4xl">
         Unlock the Power of Financial
         <span class="font-brand font-extrabold">Clarity.</span>
       </h1>
-      <button
-        class="my-5 rounded-full bg-indigo-600 px-4 py-2 text-white transition-transform hover:scale-110 hover:bg-indigo-500"
-        routerLink="/signup"
-        routerLinkActive="active"
-      >
-        GET STARTED
-      </button>
+      <div class="my-5 flex justify-center">
+        <app-cta-button class="scale-125" title="GET STARTED" routerLink="/signup" routerLinkActive="active"></app-cta-button>
+      </div>
     </div>
     <img
-      class="pointer-events-none mx-12 h-80"
+      class="pointer-events-none select-none mx-12 h-80"
       src="assets/images/coinstack.png"
       alt=""
     />
