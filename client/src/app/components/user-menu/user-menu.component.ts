@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthStateService } from '../../services/auth-state.service';
 import { inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-menu',
@@ -12,8 +12,10 @@ import { trigger, style, animate, transition } from '@angular/animations';
 })
 export class UserMenuComponent {
   private authStateService = inject(AuthStateService);
+	private router = inject(Router);
 
   logout() {
     this.authStateService.logout();
+    this.router.navigate(['/']);
   }
 }

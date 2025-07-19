@@ -5,3 +5,10 @@ export interface SignupRequest {
     password: string;
     dob: Date;
 }
+
+export interface User{
+    id: string;
+    username: string;
+    fname: string;
+    lname: string;
+}

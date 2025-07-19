@@ -3,6 +3,8 @@ import { LinkComponent } from "../link/link.component";
 import { FormsModule } from '@angular/forms';
 import { SignupRequest } from '../../models/user.model';
 import { UserApiService } from '../../services/api/user-api.service';
+import { AuthStateService } from '../../services/auth-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup-form',
@@ -12,6 +14,8 @@ import { UserApiService } from '../../services/api/user-api.service';
 })
 export class SignupFormComponent {
   private userApiService = inject(UserApiService);
+  private router = inject(Router);
+  private authStateService = inject(AuthStateService);
 
   fname: string = '';
   lname: string = '';
@@ -30,6 +34,12 @@ export class SignupFormComponent {
   confirmPasswordEmpty: boolean = false;
   dobInvalid: boolean = false;
 
+  ngOnInit() {
+    if (this.authStateService.isLoggedIn()) {
+      this.router.navigate(['/profile']);
+    }
+  }
+
   showPassword() {
     var passwordField = document.getElementById('pass') as HTMLInputElement;
     if (passwordField && passwordField.type === 'password') {
@@ -37,6 +47,7 @@ export class SignupFormComponent {
     } else {
       passwordField.type = 'password';
     }
+    // TODO dont just swap the type
   }
 
   submitForm() {

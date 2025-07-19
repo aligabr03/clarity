@@ -27,7 +27,7 @@ export class AuthService {
     async validateUser(username: string, password: string): Promise<any> {
         const user = await this.userModel.findOne({ username }).exec();
         if (!user) throw new UnauthorizedException('Invalid username or password');
-
+        
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) throw new UnauthorizedException('Invalid username or password');
 

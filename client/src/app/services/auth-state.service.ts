@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,9 +29,10 @@ export class AuthStateService {
 
   isLoggedIn(): boolean {
 		return !!sessionStorage.getItem('access_token');
+    //TODO check if token is expired
 	}
 
-  getUser(): any {
+  getUser(): User | null {
 		const user = sessionStorage.getItem('user');
 		return user ? JSON.parse(user) : null;
 	}

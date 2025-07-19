@@ -8,6 +8,7 @@ import { LucideAngularModule, UserIcon } from 'lucide-angular';
 import { AuthStateService } from '../../services/auth-state.service';
 import { UserMenuComponent } from '../user-menu/user-menu.component';
 import { CtaButtonComponent } from '../cta-button/cta-button.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
