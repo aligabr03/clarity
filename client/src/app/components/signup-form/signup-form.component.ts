@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { LinkComponent } from "../link/link.component";
+import { LinkComponent } from '../link/link.component';
 import { FormsModule } from '@angular/forms';
 import { SignupRequest } from '../../models/user.model';
 import { UserApiService } from '../../services/api/user-api.service';
 import { AuthStateService } from '../../services/auth-state.service';
 import { Router } from '@angular/router';
+import { AuthApiService } from '../../services/api/auth-api.service';
 
 @Component({
   selector: 'app-signup-form',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrl: './signup-form.component.css',
 })
 export class SignupFormComponent {
-  private userApiService = inject(UserApiService);
+  private authApiService = inject(AuthApiService);
   private router = inject(Router);
   private authStateService = inject(AuthStateService);
 
@@ -55,12 +56,16 @@ export class SignupFormComponent {
     var birthDate = new Date(this.dob);
     var age = today.getFullYear() - birthDate.getFullYear();
     var monthDiff = today.getMonth() - birthDate.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
       age--;
     }
     this.dobInvalid = age < 18 || age > 100;
 
-    this.passwordValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/.test(this.password);
+    this.passwordValid =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/.test(this.password);
 
     this.fnameEmpty = this.fname === '';
     this.lnameEmpty = this.lname === '';
@@ -69,27 +74,33 @@ export class SignupFormComponent {
     this.confirmPasswordEmpty = this.confirmPassword === '';
     this.passwordsMatch = this.password === this.confirmPassword;
 
-    if (!this.fnameEmpty && !this.lnameEmpty && !this.usernameEmpty && !this.passwordEmpty &&
-      !this.confirmPasswordEmpty && this.passwordsMatch && this.passwordValid && !this.dobInvalid) {
+    if (
+      !this.fnameEmpty &&
+      !this.lnameEmpty &&
+      !this.usernameEmpty &&
+      !this.passwordEmpty &&
+      !this.confirmPasswordEmpty &&
+      this.passwordsMatch &&
+      this.passwordValid &&
+      !this.dobInvalid
+    ) {
       const userData: SignupRequest = {
         fname: this.fname,
         lname: this.lname,
         username: this.username,
         password: this.password,
-        dob: this.dob
+        dob: this.dob,
       };
-      this.userApiService.signup(userData).subscribe(
-        response => {
-          console.log('User signed up successfully:', response);
-          // TODO Handle successful signup (e.g., redirect to login page)
+      this.authApiService.signup(userData).subscribe(
+        (response) => {
+          this.router.navigate(['/home']);
         },
-        error => {
+        (error) => {
           console.error('Error signing up user:', error);
           alert(error.error.message);
           // TODO Handle error (e.g., show error message to user)
-        }
+        },
       );
     }
-    
   }
 }

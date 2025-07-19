@@ -4,14 +4,10 @@ import { Observable } from 'rxjs';
 import { SignupRequest } from '../../models/user.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserApiService {
   private userApiUrl = 'http://localhost:3000/user';
 
   constructor(private http: HttpClient) {}
-
-  signup(userData: SignupRequest): Observable<SignupRequest> {
-    return this.http.post<SignupRequest>(`${this.userApiUrl}/signup`, userData);
-  }
 }
