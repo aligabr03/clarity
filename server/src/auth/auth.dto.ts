@@ -32,3 +32,9 @@ export class RegisterDto {
   @Type(() => Date)
   dob: Date;
 }
+
+export class RefreshTokenDto {
+  @IsString()
+  @IsNotEmpty()
+  refreshToken: string;
+}
