@@ -1,29 +1,41 @@
-<div class="sticky top-4 m-4 flex flex-row justify-between rounded-full border bg-white px-20 py-5 shadow-lg">
-  <a class="-my-2 cursor-pointer select-none font-brand text-3xl font-extrabold" routerLink="">Clarity.</a>
+<div
+  class="sticky top-4 m-4 flex flex-row justify-between rounded-full border bg-white px-20 py-5 shadow-lg"
+>
+  <a class="-my-2 cursor-pointer select-none font-brand text-3xl font-extrabold" routerLink=""
+    >Clarity.</a
+  >
   <div class="flex flex-row justify-between space-x-10">
-    @if (isLoggedIn) {
-        <p>Hi <span class="font-bold">{{fname}}</span>, let's get to saving!</p>
-        <app-link text="Dashboard" link="/dashboard"></app-link>
-        <lucide-icon [img]="UserIcon" class="my-icon"
-            cdkOverlayOrigin
-            #trigger="cdkOverlayOrigin"
-            [class.open]="menuOpen"
-            (click)="menuOpen = !menuOpen"
-            
-        ></lucide-icon>
-        <ng-template
-            cdkConnectedOverlay
-            [cdkConnectedOverlayOrigin]="trigger"
-            [cdkConnectedOverlayOpen]="menuOpen"
-            (overlayOutsideClick)="menuOpen = false"
-        >
-            <app-user-menu></app-user-menu>
-        </ng-template>
+    @if (isLoggedIn$ | async) {
+      <p>
+        Hi <span class="font-bold">{{ fname$ | async }}</span
+        >, let's get to saving!
+      </p>
+      <app-link text="Dashboard" link="/dashboard"></app-link>
+      <lucide-icon
+        [img]="UserIcon"
+        class="my-icon"
+        cdkOverlayOrigin
+        #trigger="cdkOverlayOrigin"
+        [class.open]="menuOpen"
+        (click)="menuOpen = !menuOpen"
+      ></lucide-icon>
+      <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="menuOpen"
+        (overlayOutsideClick)="menuOpen = false"
+      >
+        <app-user-menu></app-user-menu>
+      </ng-template>
     } @else {
-        <app-link text="About" link="/about"></app-link>
-        <app-link text="Login" link="/login"></app-link>
-        <app-cta-button class="-my-2" title="GET STARTED" routerLink="/signup" routerLinkActive="active"></app-cta-button>
-    }   
+      <app-link text="About" link="/about"></app-link>
+      <app-link text="Login" link="/login"></app-link>
+      <app-cta-button
+        class="-my-2"
+        title="GET STARTED"
+        routerLink="/signup"
+        routerLinkActive="active"
+      ></app-cta-button>
+    }
   </div>
 </div>
-

@@ -1,40 +1,34 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { User } from '../models/user.model';
+import { map } from 'rxjs/operators';
+import { AuthApiService } from './api/auth-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthStateService {
-  private loginState = new BehaviorSubject<boolean>(false);
-  loginState$ = this.loginState.asObservable();
+  constructor(private authApi: AuthApiService) {}
 
-  constructor() {
-    if (this.isLoggedIn()) {
-      this.setLoginState(true);
-    } else {
-      this.setLoginState(false);
-    }
+  get loginState$() {
+    return this.authApi.getAccessToken$().pipe(map((token) => !!token));
   }
 
-  setLoginState(isLoggedIn: boolean) {
-    this.loginState.next(isLoggedIn);
-  }
-
-  logout() {
-    sessionStorage.removeItem('access_token');
-		sessionStorage.removeItem('user');
-    this.setLoginState(false);
+  get user$() {
+    return this.authApi.getCurrentUser$();
   }
 
   isLoggedIn(): boolean {
-		return !!sessionStorage.getItem('access_token');
-    //TODO check if token is expired
-	}
+    return this.authApi.isAuthenticated();
+  }
 
-  getUser(): User | null {
-		const user = sessionStorage.getItem('user');
-		return user ? JSON.parse(user) : null;
-	}
+  getUser() {
+    return this.authApi.getCurrentUser();
+  }
 
+  login(credentials: any) {
+    return this.authApi.login(credentials);
+  }
+
+  logout() {
+    return this.authApi.logout();
+  }
 }
